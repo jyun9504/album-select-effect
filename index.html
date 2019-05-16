@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>鼠標觸碰換圖</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
+</head>
+<style>
+  body {
+    background: #000;
+  }
+  body, ul, li {
+    margin: 0;
+    padding: 0;
+  }
+  img {
+    border: 0px;
+    border-radius: 3px;
+  }
+  ul {
+    list-style-type: none;
+  }
+  #box {
+    border: 5px solid #fff;
+    overflow: hidden;
+    zoom: 1;
+    background: #fff;
+    border-radius: 5px;
+    padding: 0 0 3px 9px;
+  }
+  #box li, #box li img {
+    float: left;
+    width: 50px;
+    height: 50px;
+  }
+  #box li {
+    margin: 3px 3px 0 0;
+  }
+  #box li.first {
+    position: relative;
+  }
+  #box li.first, #box li.first img {
+    width: 156px;
+    height: 156px;
+  }
+  #box li.first div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 156px;
+    height: 156px;
+    display: none;
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
+    background: #fff url(img/loading.gif) 50% 50% no-repeat;
+  }
+</style>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="card col-md-6 col-sm-8 col-lg-4 col-12" style="margin-top: 9em;">
+        <div class="card-body">
+            <ul id="box">
+              <li class="first"><img src="img/small_1.png"><div id="loadingDiv" style="display: none;"></div></li>
+              <li><a href="javascript:;"><img src="img/small_1.png"></a></li>
+              <li><a href="javascript:;"><img src="img/small_2.png"></a></li>
+              <li><a href="javascript:;"><img src="img/small_3.png"></a></li>
+              <li><a href="javascript:;"><img src="img/small_4.png"></a></li>
+              <li><a href="javascript:;"><img src="img/small_5.png"></a></li>
+              <li><a href="javascript:;"><img src="img/small_6.png"></a></li>
+              <li><a href="javascript:;"><img src="img/small_7.png"></a></li>
+              <li><a href="javascript:;"><img src="img/small_8.png"></a></li>
+              <li><a href="javascript:;"><img src="img/small_9.png"></a></li>
+              <li><a href="javascript:;"><img src="img/small_10.png"></a></li>
+              <li><a href="javascript:;"><img src="img/small_11.png"></a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script type="text/javascript">
+  let allImg = document.getElementById("box").getElementsByTagName("img");
+	let loadingDiv = document.getElementById("loadingDiv");
+	for(let i = 1; i < allImg.length; i++) { // 在每個img上加入mouseover
+		  allImg[i].onmouseover = function () {
+			   let img = new Image();
+         img.src = allImg[0].src = this.src; //取代第一張
+			   loadingDiv.style.display = "block"; //顯示loading
+			   img.complete ? loadingDiv.style.display = "none" : (allImg[0].onload = function() {loadingDiv.style.display = "none"})
+         //圖片讀取完 loadingDiv消失
+      }
+	}
+</script>
+</html>
